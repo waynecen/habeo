@@ -1,7 +1,10 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap");
 
-.main {
-	padding-left: 5%;
+.layout {
+	display: flex;
+	height: 100vh;
+	padding: 0% 5% 0% 5%;
+	flex-direction: column;
 }
 
 .nav {
@@ -17,8 +20,13 @@
 .form {
 	display: flex;
 	flex-direction: column;
-	justify-content: center;
+	justify-items: center;
 	align-items: center;
+}
+
+.input {
+	justify-self: center;
+	align-self: center;
 }
 
 .question {

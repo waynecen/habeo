@@ -15,16 +15,18 @@ export default function Home() {
 				<link rel="icon" href="/favicon.ico" />
 			</Head>
 
-			<section className={styles.nav}>
-				<div className={styles.logo}>Habi</div>
-			</section>
+			<main className={styles.layout}>
+				<section className={styles.nav}>
+					<div className={styles.logo}>Habi</div>
+				</section>
 
-			<section className={styles.form}>
-				<label className={styles.question} htmlFor={goalInputId}>
-					What is the number one thing you want to get done today?
-				</label>
-				<PrimaryGoalInput id={goalInputId} />
-			</section>
+				<section className={styles.form}>
+					<label className={styles.question} htmlFor={goalInputId}>
+						What is the number one thing you want to get done today?
+					</label>
+					<PrimaryGoalInput id={goalInputId} />
+				</section>
+			</main>
 		</>
 	)
 }
