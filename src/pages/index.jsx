@@ -1,6 +1,7 @@
-import Head from "next/head"
-import styles from "@/styles/Home.module.scss"
+import LoginButton from "@/components/LoginButton"
 import PrimaryGoalInput from "@/components/PrimaryGoalInput"
+import styles from "@/styles/Home.module.scss"
+import Head from "next/head"
 import { useId } from "react"
 
 export default function Home() {
@@ -18,6 +19,7 @@ export default function Home() {
 			<main className={styles.layout}>
 				<section className={styles.nav}>
 					<div className={styles.logo}>Habi</div>
+					<LoginButton />
 				</section>
 				<div className={styles.center}>
 					<section className={styles.form}>
