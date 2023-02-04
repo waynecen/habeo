@@ -1,3 +1,5 @@
+@import "variables";
+
 .input {
 	font-family: "Inter";
 	font-size: 1.2rem;
@@ -8,9 +10,11 @@
 	border: none;
 	color: #f6f6f6;
 	background-color: transparent;
+	caret-color: $placeholder;
+	caret-shape: block;
 
 	&::placeholder {
-		color: rgba(255, 255, 255, 0.35);
+		color: $placeholder;
 		opacity: 1;
 	}
 
