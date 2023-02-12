@@ -1,2 +1,2 @@
-# Habeo 📝
+# Habi 📝
 Work in Progress
