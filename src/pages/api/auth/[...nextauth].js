@@ -1,8 +1,11 @@
 import NextAuth from "next-auth"
-import GoogleProvider from "next-auth/providers/google"
+import { MongoDBAdapter } from "@next-auth/mongodb-adapter"
+import clientPromise from "@lib/utils/mongodb"
 import DiscordProvider from "next-auth/providers/discord"
+import GoogleProvider from "next-auth/providers/google"
 
 export const authOptions = {
+	adapter: MongoDBAdapter(clientPromise),
 	providers: [
 		GoogleProvider({
 			clientId: process.env.GOOGLE_CLIENT_ID,
@@ -13,7 +16,7 @@ export const authOptions = {
 			clientSecret: process.env.DISCORD_CLIENT_SECRET,
 		}),
 	],
-	secret: process.env.JWT_SECRET,
+	secret: process.env.NEXTAUTH_SECRET,
 }
 
 export default NextAuth(authOptions)
