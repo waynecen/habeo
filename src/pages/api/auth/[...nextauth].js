@@ -1,6 +1,6 @@
+import NextAuth from "next-auth"
 import { MongoDBAdapter } from "@next-auth/mongodb-adapter"
 import clientPromise from "@lib/utils/mongodb"
-import NextAuth from "next-auth"
 import DiscordProvider from "next-auth/providers/discord"
 import GoogleProvider from "next-auth/providers/google"
 
