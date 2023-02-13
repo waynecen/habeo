@@ -1,6 +1,6 @@
 import clientPromise from "@lib/utils/mongodb"
 
-export default async function topTwentyMovies(req, res) {
+export default async function exampleFetchMovies(req, res) {
 	try {
 		const client = await clientPromise
 		const db = client.db("sample_mflix")

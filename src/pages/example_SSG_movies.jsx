@@ -1,15 +1,17 @@
+/* example of API route generating static data 
+from DB delete this route for production */
 import clientPromise from "@lib/utils/mongodb"
 
-export default function Movies({ movies }) {
+export default function Top({ movies }) {
 	return (
 		<div>
-			<h1>Top 20 Movies of All Time</h1>
+			<h1>Top 1000 Movies of All Time</h1>
 			<p>
 				<small>(According to Metacritic)</small>
 			</p>
 			<ul>
-				{movies.map((movie) => (
-					<li>
+				{movies.map((movie, index) => (
+					<li key={index}>
 						<h2>{movie.title}</h2>
 						<h3>{movie.metacritic}</h3>
 						<p>{movie.plot}</p>
@@ -20,7 +22,7 @@ export default function Movies({ movies }) {
 	)
 }
 
-export async function getServerSideProps() {
+export async function getStaticProps() {
 	try {
 		const client = await clientPromise
 		const db = client.db("sample_mflix")
@@ -29,7 +31,7 @@ export async function getServerSideProps() {
 			.collection("movies")
 			.find({})
 			.sort({ metacritic: -1 })
-			.limit(20)
+			.limit(1000)
 			.toArray()
 
 		return {
