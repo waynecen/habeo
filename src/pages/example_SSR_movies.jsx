@@ -1,6 +1,6 @@
 /* example of API route calling server data 
 from DB delete this route for production */
-import clientPromise from "@lib/utils/mongodb"
+import clientPromise from "@lib/mongodb"
 
 export default function Movies({ movies }) {
 	return (
