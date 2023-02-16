@@ -1,4 +1,4 @@
-import clientPromise from "@lib/utils/mongodb"
+import clientPromise from "@lib/mongodb"
 
 export default async function exampleFetchMovies(req, res) {
 	try {
