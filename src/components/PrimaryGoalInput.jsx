@@ -1,4 +1,4 @@
-import styles from "@/styles/PrimaryGoalInput.module.scss"
+import styles from "@/styles/components/PrimaryGoalInput.module.scss"
 import { useState } from "react"
 
 export default function PrimaryGoalInput({ id }) {
