@@ -12,7 +12,7 @@ export default function SignIn() {
 			</Head>
 
 			<div className={styles.form}>
-				<h3>Sign in to your account</h3>
+				<h3 className={styles.form_header}>Sign in to your account</h3>
 				<form>
 					<div className={styles.input_group}>
 						<input

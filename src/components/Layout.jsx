@@ -4,14 +4,15 @@ import Link from "next/link"
 
 export default function Layout({ children, visible }) {
 	return (
-		<div className={styles.layout}>
-			<section className={styles.nav}>
+		<div className={styles.layout_wrapper}>
+			<div className={styles.nav}>
 				<Link href="/" className={styles.logo}>
 					Habi
 				</Link>
 				{visible && <LoginButton />}
-			</section>
-			{children}
+			</div>
+
+			<div className={styles.children_layout}>{children}</div>
 		</div>
 	)
 }

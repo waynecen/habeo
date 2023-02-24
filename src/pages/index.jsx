@@ -16,7 +16,7 @@ export default function Home() {
 				<link rel="icon" href="/favicon.ico" />
 			</Head>
 
-			<main className={styles.layout}>
+			<main>
 				<div className={styles.center}>
 					<section className={styles.form}>
 						<label className={styles.question} htmlFor={goalInputId}>
