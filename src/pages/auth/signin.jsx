@@ -3,6 +3,7 @@ import Head from "next/head"
 import Link from "next/link"
 import Layout from "src/components/Layout"
 import Image from "next/image"
+import { RiEyeCloseLine } from "react-icons/ri"
 
 export default function SignIn() {
 	return (
@@ -11,7 +12,7 @@ export default function SignIn() {
 				<title>Login | Habi</title>
 			</Head>
 
-			<div className={styles.form}>
+			<div className={styles.form_layout}>
 				<h3 className={styles.form_header}>Sign in to your account</h3>
 				<form>
 					<div className={styles.input_group}>
@@ -21,14 +22,19 @@ export default function SignIn() {
 							name="username"
 							placeholder="Username"
 							autoComplete="off"
-						></input>
+						/>
+					</div>
+					<div className={styles.input_group}>
 						<input
 							className={styles.input}
 							type="password"
 							name="password"
 							placeholder="Password"
 							autoComplete="off"
-						></input>
+						/>
+						<span>
+							<RiEyeCloseLine size={21} />
+						</span>
 					</div>
 					<div className={styles.button_group}>
 						<button className={styles.button} type="submit">
