@@ -51,15 +51,20 @@
 		}
 
 		&:focus + * {
-			color: $white;
+			color: $offwhite;
 		}
 	}
 
 	// aligns the password icon to the right side of input field
 	> span {
+		cursor: pointer;
 		position: absolute;
 		top: 35%;
 		right: 12px;
+
+		&:hover {
+			color: $offwhite;
+		}
 	}
 }
 
@@ -69,6 +74,9 @@
 	max-width: 311px;
 
 	.button {
+		display: flex;
+		align-items: center;
+		justify-content: center;
 		font-size: 14px;
 		color: $offblack;
 		height: 44px;
@@ -76,11 +84,20 @@
 		border-radius: 4px;
 		margin-block: 8px;
 		cursor: pointer;
+
+		.logo_google {
+			margin-right: 16px;
+		}
 	}
 
 	.button:first-child {
-		color: $white;
-		background-color: rgb(65, 103, 226);
+		color: $offwhite;
+		background-color: $primary-btn;
+		transition: background-color $ease-out ease-out;
+
+		&:hover {
+			background-color: $primary-btn-hover;
+		}
 	}
 }
 
