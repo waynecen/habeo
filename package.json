@@ -1,8 +1,11 @@
 {
 	"name": "habi",
-	"version": "0.1.0",
+	"version": "0.1.1",
+	"description": "Gamified Todo App.",
+	"author": "Wayne Cen (https://waynecen.com/)",
 	"private": true,
 	"scripts": {
+		"preinstall": "npx only-allow pnpm",
 		"dev": "next dev",
 		"build": "next build",
 		"start": "next start",
@@ -17,7 +20,8 @@
 		"next": "13.1.5",
 		"next-auth": "^4.19.2",
 		"react": "18.2.0",
-		"react-dom": "18.2.0"
+		"react-dom": "18.2.0",
+		"react-icons": "^4.7.1"
 	},
 	"devDependencies": {
 		"sass": "^1.57.1"

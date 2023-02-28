@@ -1,6 +1,17 @@
-//components
+// colours
+$offblack: #141414;
+$offwhite: #f6f6f6;
+
+// components
+$primary-btn: #4167e2;
+$primary-btn-hover: #3b5ed1;
 $btn: #242424;
 $btn-hover: #313131;
+$btn-padding: 8px 12px 8px 12px;
+$border-stroke: 1px #454545 solid;
 
-//typography
+// typography
 $placeholder: #5c5c5c;
+
+// animation
+$ease-out: 0.225s;

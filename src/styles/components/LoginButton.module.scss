@@ -1,16 +1,18 @@
-@import "variables";
+@import "@/styles/variables";
 
 .button {
 	font-family: "Inter";
 	font-weight: 700;
+	max-width: 300px;
 	background-color: $btn;
 	color: white;
 	text-align: center;
 	border: 1px solid #454545;
 	border-radius: 4px;
-	padding: 8px 12px 8px 12px;
+	padding: $btn-padding;
 	cursor: pointer;
-	transition-duration: 0.225s;
+	transition-duration: $ease-out;
+	transition-timing-function: ease-out;
 
 	&:hover {
 		background-color: $btn-hover;

@@ -1,0 +1,30 @@
+@import "@/styles/variables";
+
+.layout_wrapper {
+	display: flex;
+	flex-direction: column;
+	padding: 0% 4% 0% 4%;
+	height: 100vh;
+}
+
+.children_layout {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	height: 100vh;
+}
+
+.nav {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	margin-top: 32px;
+
+	.logo {
+		max-width: fit-content;
+		font-weight: 700;
+		text-transform: uppercase;
+		text-decoration: none;
+		color: white;
+	}
+}

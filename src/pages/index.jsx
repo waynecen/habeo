@@ -1,4 +1,4 @@
-import LoginButton from "@/components/LoginButton"
+import Layout from "@/components/Layout"
 import PrimaryGoalInput from "@/components/PrimaryGoalInput"
 import styles from "@/styles/Home.module.scss"
 import Head from "next/head"
@@ -8,7 +8,7 @@ export default function Home() {
 	const goalInputId = useId()
 
 	return (
-		<>
+		<Layout visible>
 			<Head>
 				<title>Habi</title>
 				<meta name="description" content="Gamified To-do List with Goal Tracking" />
@@ -16,11 +16,7 @@ export default function Home() {
 				<link rel="icon" href="/favicon.ico" />
 			</Head>
 
-			<main className={styles.layout}>
-				<section className={styles.nav}>
-					<div className={styles.logo}>Habi</div>
-					<LoginButton />
-				</section>
+			<main>
 				<div className={styles.center}>
 					<section className={styles.form}>
 						<label className={styles.question} htmlFor={goalInputId}>
@@ -30,6 +26,6 @@ export default function Home() {
 					</section>
 				</div>
 			</main>
-		</>
+		</Layout>
 	)
 }
