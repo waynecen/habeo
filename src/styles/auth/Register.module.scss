@@ -84,16 +84,12 @@
 		border-radius: 4px;
 		margin-block: 8px;
 		cursor: pointer;
-		transition: background-color $ease-out ease-out;
-
-		.logo_google {
-			margin-right: 16px;
-		}
 	}
 
 	.button:first-child {
 		color: $offwhite;
 		background-color: $primary-btn;
+		transition: background-color $ease-out ease-out;
 
 		&:hover {
 			background-color: $primary-btn-hover;
