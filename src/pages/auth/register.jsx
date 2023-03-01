@@ -1,28 +1,21 @@
-import styles from "@/styles/auth/Signin.module.scss"
+import Layout from "@/components/Layout"
+import styles from "@/styles/auth/Register.module.scss"
 import Head from "next/head"
 import Link from "next/link"
-import Layout from "src/components/Layout"
-import Image from "next/image"
-import { RiEyeCloseLine, RiEyeLine } from "react-icons/ri"
 import { useState } from "react"
-import { signIn } from "next-auth/react"
+import { RiEyeCloseLine, RiEyeLine } from "react-icons/ri"
 
-export default function SignIn() {
+export default function Register() {
 	const [visible, setVisible] = useState(false)
 
-	// Google Sign In
-	async function handleGoogleSignIn() {
-		signIn("google", { callbackUrl: "http://localhost:3000" })
-	}
-
 	return (
-		<Layout visible={false}>
+		<Layout>
 			<Head>
-				<title>Login | Habi</title>
+				<title>Register | Habi</title>
 			</Head>
 
 			<div className={styles.form_layout}>
-				<h3 className={styles.form_header}>Sign in to your account</h3>
+				<h3 className={styles.form_header}>Register a new Habi account</h3>
 				<form>
 					<div className={styles.input_group}>
 						<input
@@ -36,9 +29,18 @@ export default function SignIn() {
 					<div className={styles.input_group}>
 						<input
 							className={styles.input}
+							type="email"
+							name="email"
+							placeholder="Email"
+							autoComplete="off"
+						/>
+					</div>
+					<div className={styles.input_group}>
+						<input
+							className={styles.input}
 							type={`${visible ? "text" : "password"}`}
 							name="password"
-							placeholder="Password"
+							placeholder="Password (min. 8 characters)"
 							autoComplete="off"
 						/>
 						<span onClick={() => setVisible(!visible)}>
@@ -47,29 +49,15 @@ export default function SignIn() {
 					</div>
 					<div className={styles.button_group}>
 						<button className={styles.button} type="submit">
-							Login
-						</button>
-						<button
-							className={styles.button}
-							type="button"
-							onClick={handleGoogleSignIn}
-						>
-							<Image
-								src={"/assets/google-logo.svg"}
-								alt="Google Logo"
-								width="21"
-								height="21"
-								className={styles.logo_google}
-							/>
-							Sign in with Google
+							Register account
 						</button>
 					</div>
 				</form>
 
 				<p className={styles.signup_text}>
-					Don&apos;t have an account?
-					<Link href="/auth/register" className={styles.signup_link}>
-						&nbsp;Sign Up
+					Have an account?
+					<Link href="/auth/signin" className={styles.signup_link}>
+						&nbsp;Log In
 					</Link>
 				</p>
 			</div>
