@@ -8,7 +8,6 @@ import GoogleProvider from 'next-auth/providers/google'
 const argon2 = require('argon2')
 
 export const authOptions = {
-	adapter: MongoDBAdapter(clientPromise),
 	pages: {
 		signIn: '/auth/signin',
 	},
