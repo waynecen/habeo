@@ -1,4 +1,4 @@
-@import "@/styles/variables";
+@import '@/styles/variables';
 
 .layout_wrapper {
 	display: flex;
@@ -26,5 +26,23 @@
 		text-transform: uppercase;
 		text-decoration: none;
 		color: white;
+	}
+}
+
+.button {
+	font-size: 0.8em;
+	background-color: $btn;
+	color: white;
+	text-align: center;
+	text-decoration: none;
+	border: 1px solid #454545;
+	border-radius: 4px;
+	padding: $btn-padding;
+	cursor: pointer;
+	transition-duration: $ease-out;
+	transition-timing-function: ease-out;
+
+	&:hover {
+		background-color: $btn-hover;
 	}
 }
