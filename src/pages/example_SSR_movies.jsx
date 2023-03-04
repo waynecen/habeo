@@ -1,6 +1,6 @@
 /* example of API route calling server data 
 from DB delete this route for production */
-import clientPromise from "@lib/mongodb"
+import clientPromise from '@lib/mongodb'
 
 export default function Movies({ movies }) {
 	return (
@@ -25,10 +25,10 @@ export default function Movies({ movies }) {
 export async function getServerSideProps() {
 	try {
 		const client = await clientPromise
-		const db = client.db("sample_mflix")
+		const db = client.db('sample_mflix')
 
 		const movies = await db
-			.collection("movies")
+			.collection('movies')
 			.find({})
 			.sort({ metacritic: -1 })
 			.limit(20)

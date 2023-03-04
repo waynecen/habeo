@@ -1,10 +1,10 @@
-import styles from "@/styles/components/PrimaryGoalInput.module.scss"
-import { useState } from "react"
+import styles from '@/styles/components/PrimaryGoalInput.module.scss'
+import { useState } from 'react'
 
 export default function PrimaryGoalInput({ id }) {
-	const [primaryGoal, setPrimaryGoal] = useState("")
+	const [primaryGoal, setPrimaryGoal] = useState('')
 
-	const defaultPlaceholder = "Today, I want to..."
+	const defaultPlaceholder = 'Today, I want to...'
 
 	return (
 		<form>
@@ -15,7 +15,7 @@ export default function PrimaryGoalInput({ id }) {
 				className={styles.input}
 				placeholder={defaultPlaceholder}
 				onChange={(e) => setPrimaryGoal(e.target.value)}
-				onFocus={(e) => (e.target.placeholder = "")}
+				onFocus={(e) => (e.target.placeholder = '')}
 				onBlur={(e) => (e.target.placeholder = defaultPlaceholder)}
 				autoFocus
 				autoComplete="off"
