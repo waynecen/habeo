@@ -1,6 +1,4 @@
-import clientPromise from '@lib/mongodb'
 import Users from '@database/model/userSchema'
-import { MongoDBAdapter } from '@next-auth/mongodb-adapter'
 import connectMongo from '@database/connectMongo'
 import NextAuth from 'next-auth'
 import CredentialsProvider from 'next-auth/providers/credentials'
