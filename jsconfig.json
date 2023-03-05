@@ -3,7 +3,9 @@
 		"baseUrl": ".",
 		"paths": {
 			"@/*": ["./src/*"],
-			"@lib/*": ["lib/*"]
+			"@lib/*": ["./lib/*"],
+			"@database/*": ["./database/*"],
+			"@model/*": ["./database/model/*"]
 		}
 	}
 }

@@ -1,19 +1,51 @@
-import styles from "@/styles/auth/Signin.module.scss"
-import Head from "next/head"
-import Link from "next/link"
-import Layout from "src/components/Layout"
-import Image from "next/image"
-import { RiEyeCloseLine, RiEyeLine } from "react-icons/ri"
-import { useState } from "react"
-import { signIn } from "next-auth/react"
+import Layout from '@/components/Layout'
+import styles from '@/styles/auth/Signin.module.scss'
+import loginValidate from '@lib/formValidation'
+import { useFormik } from 'formik'
+import { signIn } from 'next-auth/react'
+import Head from 'next/head'
+import Image from 'next/image'
+import Link from 'next/link'
+import { useRouter } from 'next/router'
+import { useState } from 'react'
+import { RiEyeCloseLine, RiEyeLine } from 'react-icons/ri'
 
 export default function SignIn() {
+	// Styling
+	const errorBorderColor = '#cc2727'
+
+	// Password Visibility
 	const [visible, setVisible] = useState(false)
+
+	const router = useRouter()
+
+	// Handle Form Submission
+	async function onSubmit(values) {
+		const status = await signIn('credentials', {
+			redirect: false,
+			email: values.email,
+			password: values.password,
+			callbackUrl: '/',
+		})
+
+		if (status.ok) router.push(status.url)
+	}
 
 	// Google Sign In
 	async function handleGoogleSignIn() {
-		signIn("google", { callbackUrl: "http://localhost:3000" })
+		signIn('google', { callbackUrl: 'http://localhost:3000' })
 	}
+
+	// Form Handler
+	const formik = useFormik({
+		initialValues: {
+			email: '',
+			password: '',
+		},
+		validateOnBlur: false,
+		validate: loginValidate,
+		onSubmit,
+	})
 
 	return (
 		<Layout visible={false}>
@@ -23,30 +55,52 @@ export default function SignIn() {
 
 			<div className={styles.form_layout}>
 				<h3 className={styles.form_header}>Sign in to your account</h3>
-				<form>
+				<form onSubmit={formik.handleSubmit}>
 					<div className={styles.input_group}>
 						<input
 							className={styles.input}
 							type="text"
-							name="username"
-							placeholder="Username"
+							name="email"
+							placeholder="Email"
 							autoComplete="off"
+							style={{
+								borderColor:
+									formik.errors.email && formik.touched.email ? errorBorderColor : '',
+							}}
+							{...formik.getFieldProps('email')}
 						/>
 					</div>
+					{formik.errors.email && formik.touched.email ? (
+						<span className={styles.error}>{formik.errors.email}</span>
+					) : (
+						<></>
+					)}
 					<div className={styles.input_group}>
 						<input
 							className={styles.input}
-							type={`${visible ? "text" : "password"}`}
+							type={`${visible ? 'text' : 'password'}`}
 							name="password"
 							placeholder="Password"
 							autoComplete="off"
+							style={{
+								borderColor:
+									formik.errors.password && formik.touched.password
+										? errorBorderColor
+										: '',
+							}}
+							{...formik.getFieldProps('password')}
 						/>
 						<span onClick={() => setVisible(!visible)}>
 							{visible ? <RiEyeLine size={21} /> : <RiEyeCloseLine size={21} />}
 						</span>
 					</div>
+					{formik.errors.password && formik.touched.password ? (
+						<span className={styles.error}>{formik.errors.password}</span>
+					) : (
+						<></>
+					)}
 					<div className={styles.button_group}>
-						<button className={styles.button} type="submit">
+						<button type="submit" className={styles.button}>
 							Login
 						</button>
 						<button
@@ -55,7 +109,7 @@ export default function SignIn() {
 							onClick={handleGoogleSignIn}
 						>
 							<Image
-								src={"/assets/google-logo.svg"}
+								src={'/assets/google-logo.svg'}
 								alt="Google Logo"
 								width="21"
 								height="21"

@@ -1,9 +1,9 @@
-import "@/styles/globals.scss"
-import { Inter } from "@next/font/google"
-import { SessionProvider } from "next-auth/react"
+import '@/styles/globals.scss'
+import { Inter } from '@next/font/google'
+import { SessionProvider } from 'next-auth/react'
 
 const inter = Inter({
-	subsets: ["latin"],
+	subsets: ['latin'],
 })
 
 export default function App({

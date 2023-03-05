@@ -1,4 +1,4 @@
-@import "@/styles/variables";
+@import '@/styles/variables';
 
 .form_layout {
 	display: flex;
@@ -118,4 +118,11 @@
 			background-color: $btn-hover;
 		}
 	}
+}
+
+.error {
+	font-size: 0.75rem;
+	color: #cc2727;
+	display: flex;
+	justify-content: flex-end;
 }

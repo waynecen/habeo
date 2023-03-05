@@ -1,13 +1,11 @@
-import Layout from "@/components/Layout"
-import PrimaryGoalInput from "@/components/PrimaryGoalInput"
-import styles from "@/styles/Home.module.scss"
-import Head from "next/head"
-import { useId } from "react"
-import { useSession } from "next-auth/react"
+import Layout from '@/components/Layout'
+import PrimaryGoalInput from '@/components/PrimaryGoalInput'
+import styles from '@/styles/Home.module.scss'
+import { useSession } from 'next-auth/react'
+import Head from 'next/head'
+import { useId } from 'react'
 
 export default function Home() {
-	const goalInputId = useId()
-
 	const { data: session } = useSession()
 
 	return (
@@ -31,7 +29,7 @@ function User({ session }) {
 			<div className={styles.center}>
 				<section className={styles.form}>
 					<label className={styles.question} htmlFor={goalInputId}>
-						What is the number one thing you want to get done today,{" "}
+						What is the number one thing you want to get done today,{' '}
 						{session.user.name}?
 					</label>
 					<PrimaryGoalInput id={goalInputId} />
@@ -48,7 +46,7 @@ function Guest() {
 			<div className={styles.center}>
 				<section className={styles.form}>
 					<label className={styles.question} htmlFor={goalInputId}>
-						What is the number one thing you want to get done today?
+						What is the number one thing you want to get done today, guest?
 					</label>
 					<PrimaryGoalInput id={goalInputId} />
 				</section>
