@@ -1,5 +1,5 @@
-import Users from '@database/model/userSchema'
 import connectMongo from '@database/connectMongo'
+import Users from '@database/model/users'
 import NextAuth from 'next-auth'
 import CredentialsProvider from 'next-auth/providers/credentials'
 import GoogleProvider from 'next-auth/providers/google'
@@ -11,9 +11,11 @@ export const authOptions = {
 	},
 	providers: [
 		CredentialsProvider({
+			id: 'credentials',
 			name: 'Credentials',
 			async authorize(credentials, req) {
-				connectMongo().catch((error) => {
+				// Connect to Database
+				await connectMongo().catch((error) => {
 					error: 'Failed to connect to database'
 				})
 
@@ -32,7 +34,11 @@ export const authOptions = {
 					throw new Error('Username and Password do not match.')
 				}
 
-				return user
+				if (user) {
+					return user
+				} else {
+					return null
+				}
 			},
 		}),
 		GoogleProvider({
