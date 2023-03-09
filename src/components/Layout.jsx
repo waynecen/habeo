@@ -1,6 +1,6 @@
 import styles from '@/styles/components/Layout.module.scss'
 import Link from 'next/link'
-import { useSession, signOut } from 'next-auth/react'
+import { useSession, signOut, signIn } from 'next-auth/react'
 
 export default function Layout({ children, visible }) {
 	const { data: session } = useSession()
@@ -20,9 +20,9 @@ export default function Layout({ children, visible }) {
 						<></>
 					)
 				) : visible ? (
-					<Link href={'/auth/signin'} className={styles.button}>
-						Login
-					</Link>
+					<button onClick={() => signIn()} className={styles.button}>
+						Sign In
+					</button>
 				) : (
 					<></>
 				)}
