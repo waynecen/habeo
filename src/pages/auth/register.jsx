@@ -7,6 +7,7 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { useState } from 'react'
 import { RiEyeCloseLine, RiEyeLine } from 'react-icons/ri'
+import { signIn } from 'next-auth/react'
 
 export default function Register() {
 	// Styling
@@ -24,11 +25,18 @@ export default function Register() {
 			body: JSON.stringify(values),
 		}
 
-		await fetch('http://localhost:3000/api/auth/signup', options)
-			.then((res) => res.json())
-			.then((data) => {
-				if (data) router.push('http://localhost:3000')
-			})
+		await fetch('http://localhost:3000/api/auth/signup', options).then(
+			(res) => res.json
+		)
+
+		const status = await signIn('credentials', {
+			email: values.email,
+			password: values.password,
+			createdAt: Date.now(),
+			callbackUrl: '/dashboard',
+		})
+
+		if (status.ok) router.push(status.url)
 	}
 
 	// Form Handler

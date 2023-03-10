@@ -1,0 +1,109 @@
+@import '@/styles/variables';
+
+.main {
+	height: 100%;
+}
+
+// Form
+.form {
+	display: flex;
+	flex-direction: column;
+	max-width: 40vw;
+	width: 100%;
+	padding-inline: 24px;
+
+	.input_group {
+		display: flex;
+		flex-direction: row;
+		margin-block: 28px;
+
+		.input {
+			width: 100%;
+			align-self: center;
+			color: $grey-98;
+			height: 32px;
+			outline: none;
+			border: none;
+			margin-right: 8px;
+			border-radius: $brdr-radius;
+			background-color: $grey-10;
+			padding-inline: 12px;
+			padding-block: 6px;
+
+			&:focus {
+				// substitute with accent gradient
+				// border: $grey-border;
+			}
+		}
+
+		.button {
+			background-color: $grey-15;
+			color: $grey-98;
+			border: none;
+			border: $grey-border;
+			border-radius: $brdr-radius;
+			padding: $btn-padding;
+			height: 44px;
+			transition: background-color $ease-out;
+			cursor: pointer;
+
+			&:hover {
+				background-color: $btn-2nd-hover;
+			}
+		}
+	}
+}
+
+// Missions
+.missionList {
+	max-width: 40vw;
+	width: 100%;
+	background-color: $grey-10;
+	border: $grey-border;
+	border-radius: $brdr-radius;
+	padding-inline: 24px;
+	padding-block: 20px;
+
+	.header {
+		margin: 0;
+	}
+
+	.mission {
+		display: flex;
+		flex-direction: row;
+		justify-content: space-between;
+		align-items: center;
+		background-color: $grey-20;
+		border-radius: $brdr-radius;
+		margin-block: 8px;
+		padding-inline: 12px;
+		padding-block: 4px;
+		transition: background-color $ease-out;
+
+		.details {
+			font-size: $xs-12;
+			cursor: auto;
+		}
+
+		.edit_icon {
+			justify-self: flex-end;
+			color: $grey-60;
+			visibility: hidden;
+			transition: color $ease-out;
+			padding: 4px;
+			cursor: pointer;
+
+			&:hover {
+				color: $grey-98;
+			}
+		}
+
+		&:hover {
+			background-color: $grey-30;
+
+			.edit_icon {
+				visibility: visible;
+			}
+		}
+	}
+}

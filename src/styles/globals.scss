@@ -1,6 +1,6 @@
 :root {
-	background-color: #141414;
-	color: #f6f6f6;
+	background-color: hsl(0, 0%, 5%);
+	color: hsl(0, 0%, 98%);
 }
 
 html,
@@ -14,4 +14,5 @@ input,
 textarea,
 button {
 	font-family: inherit;
+	font-size: inherit;
 }
