@@ -25,24 +25,23 @@
 		font-weight: 700;
 		text-transform: uppercase;
 		text-decoration: none;
-		color: white;
+		color: $grey-98;
 	}
 }
 
 .button {
 	font-size: 0.8rem;
-	background-color: $btn;
-	color: white;
+	background-color: $grey-15;
+	color: $grey-98;
 	text-align: center;
 	text-decoration: none;
-	border: 1px solid #454545;
+	border: $grey-border;
 	border-radius: 4px;
 	padding: $btn-padding;
 	cursor: pointer;
-	transition-duration: $ease-out;
-	transition-timing-function: ease-out;
+	transition: background-color $ease-out;
 
 	&:hover {
-		background-color: $btn-hover;
+		background-color: $btn-2nd-hover;
 	}
 }
