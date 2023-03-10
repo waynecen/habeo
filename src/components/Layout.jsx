@@ -6,8 +6,8 @@ export default function Layout({ children, visible }) {
 	const { data: session } = useSession()
 
 	return (
-		<div className={styles.layout_wrapper}>
-			<div className={styles.nav}>
+		<div className={styles.wrapper}>
+			<nav className={styles.nav}>
 				<Link href="/" className={styles.logo}>
 					Habi
 				</Link>
@@ -26,7 +26,7 @@ export default function Layout({ children, visible }) {
 				) : (
 					<></>
 				)}
-			</div>
+			</nav>
 
 			<div className={styles.children_layout}>{children}</div>
 		</div>

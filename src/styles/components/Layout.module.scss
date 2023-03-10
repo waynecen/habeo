@@ -1,10 +1,44 @@
 @import '@/styles/variables';
 
-.layout_wrapper {
+.wrapper {
 	display: flex;
 	flex-direction: column;
-	padding: 0% 4% 0% 4%;
 	height: 100vh;
+
+	.nav {
+		display: flex;
+		flex-direction: row;
+		justify-content: space-between;
+		align-items: center;
+		padding-inline: 6%;
+		padding-block: 12px;
+		border-bottom: $grey-border;
+
+		.logo {
+			max-width: fit-content;
+			font-weight: 700;
+			text-transform: uppercase;
+			text-decoration: none;
+			color: $grey-98;
+		}
+
+		.button {
+			text-align: center;
+			text-decoration: none;
+			font-size: $xs-12;
+			background-color: $grey-15;
+			color: $grey-98;
+			border: $grey-border;
+			border-radius: $brdr-radius;
+			padding: $btn-padding;
+			transition: background-color $ease-out;
+			cursor: pointer;
+
+			&:hover {
+				background-color: $btn-2nd-hover;
+			}
+		}
+	}
 }
 
 .children_layout {
@@ -12,36 +46,5 @@
 	flex-direction: column;
 	justify-content: center;
 	height: 100vh;
-}
-
-.nav {
-	display: flex;
-	flex-direction: row;
-	justify-content: space-between;
-	margin-top: 32px;
-
-	.logo {
-		max-width: fit-content;
-		font-weight: 700;
-		text-transform: uppercase;
-		text-decoration: none;
-		color: $grey-98;
-	}
-}
-
-.button {
-	font-size: 0.8rem;
-	background-color: $grey-15;
-	color: $grey-98;
-	text-align: center;
-	text-decoration: none;
-	border: $grey-border;
-	border-radius: 4px;
-	padding: $btn-padding;
-	cursor: pointer;
-	transition: background-color $ease-out;
-
-	&:hover {
-		background-color: $btn-2nd-hover;
-	}
+	padding-inline: 6%;
 }
