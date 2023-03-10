@@ -1,17 +1,37 @@
-// colours
-$offblack: #141414;
-$offwhite: #f6f6f6;
+//colours
+$primary-btn: hsl(226, 92%, 58%);
+$primary-btn-hover: hsl(226, 82%, 52%);
+
+// greys
+$grey-05: hsl(0, 0, 5);
+$grey-10: hsl(0, 0, 10);
+$grey-15: hsl(0, 0, 15);
+$grey-20: hsl(0, 0, 20);
+$grey-30: hsl(0, 0, 30);
+$grey-60: hsl(0, 0, 60);
+$grey-75: hsl(0, 0, 75);
+$grey-90: hsl(0, 0, 90);
+$grey-98: hsl(0, 0, 98);
+
+//typography
+$xxs-10: 0.625rem;
+$xs-12: 0.75rem;
+$s-14: 0.875rem;
+$m-20: 1.25rem;
+$l-24: 1.5rem;
+$xl-32: 2rem;
+$xxl-48: 3rem;
 
 // components
-$primary-btn: #3360f7;
-$primary-btn-hover: hsl(226, 82%, 52%);
-$btn: #242424;
-$btn-hover: #313131;
-$btn-padding: 8px 12px 8px 12px;
-$border-stroke: 1px #454545 solid;
+$placeholder: $grey-30;
 
-// typography
-$placeholder: #5c5c5c;
+// buttons
+$btn-padding: 8px 12px 8px 12px;
+$btn-2nd-hover: $grey-20;
+
+// borders
+$grey-border: 1px solid $grey-30;
+$brdr-radius: 4px;
 
 // animation
-$ease-out: 0.225s;
+$ease-out: 0.225s ease-out;
