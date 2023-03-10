@@ -1,15 +1,14 @@
+import Head from 'next/head'
 import Layout from '@/components/Layout'
-import PrimaryGoalInput from '@/components/PrimaryGoalInput'
 import styles from '@/styles/Dashboard.module.scss'
 import connectMongo from '@database/connectMongo'
 import Task from '@database/model/tasks'
 import { useFormik } from 'formik'
-import Head from 'next/head'
-import { useId, useState } from 'react'
+import { useState } from 'react'
 import { BiPlus } from 'react-icons/bi'
+import { MdEdit } from 'react-icons/md'
 
 export default function Dashboard({ tasks }) {
-	const goalInputId = useId()
 	const [missions, setMissions] = useState([])
 
 	// Form handler
@@ -21,7 +20,7 @@ export default function Dashboard({ tasks }) {
 		onSubmit,
 	})
 
-	// Add todo to list
+	// Add mission to end of list
 	function addMission(description) {
 		setMissions([...missions, { id: missions.length + 1, description }])
 	}
@@ -43,45 +42,56 @@ export default function Dashboard({ tasks }) {
 	return (
 		<Layout visible>
 			<Head>
-				<title>Habi</title>
-				<meta name="description" content="Gamified To-do List with Goal Tracking" />
+				<title>Dashboard | Habi</title>
+				<meta
+					name="description"
+					content="Productivity app with roleplay elements"
+				/>
 				<meta name="viewport" content="width=device-width, initial-scale=1" />
 				<link rel="icon" href="/favicon.ico" />
 			</Head>
 
-			<main>
-				<div className={styles.center}>
-					<section className={styles.form}>
-						<label className={styles.question} htmlFor={goalInputId}>
-							What is the number one thing you want to get done today?
-						</label>
-						<PrimaryGoalInput id={goalInputId} />
+			<main className={styles.main}>
+				<section className={styles.form}>
+					<form onSubmit={formik.handleSubmit}>
+						<div className={styles.input_group}>
+							<input
+								className={styles.input}
+								type="text"
+								name="description"
+								placeholder="New mission"
+								autoComplete="off"
+								{...formik.getFieldProps('description')}
+							/>
+							<button className={styles.button} type="submit">
+								<span>
+									<BiPlus size={20} />
+								</span>
+							</button>
+						</div>
+					</form>
+				</section>
 
-						<form onSubmit={formik.handleSubmit}>
-							<div className={styles.input_group}>
-								<input
-									className={styles.input}
-									type="text"
-									name="description"
-									placeholder="New Task"
-									autoComplete="off"
-									{...formik.getFieldProps('description')}
-								/>
-								<button className={styles.button} type="submit">
-									<span>
-										<BiPlus size={21} />
-									</span>
-								</button>
-							</div>
-						</form>
-					</section>
-				</div>
-				<section>
+				<section className={styles.missionList}>
+					{/* Populate missions from server  */}
+					<h4 className={styles.header}>Mission List</h4>
 					{tasks.map((task) => (
-						<p key={task.id}>{task.description}</p>
+						<div key={task._id} className={styles.mission}>
+							<p className={styles.details}>{task.description}</p>
+							<span className={styles.edit_icon}>
+								<MdEdit size={20} />
+							</span>
+						</div>
 					))}
+
+					{/* Client-side rendering */}
 					{missions.map((mission) => (
-						<p key={mission.id}>{mission.description}</p>
+						<div key={mission.id} className={styles.mission}>
+							<p className={styles.details}>{mission.description}</p>
+							<span className={styles.edit_icon}>
+								<MdEdit size={20} />
+							</span>
+						</div>
 					))}
 				</section>
 			</main>
@@ -89,6 +99,7 @@ export default function Dashboard({ tasks }) {
 	)
 }
 
+// Fetch user missions from database
 export async function getServerSideProps() {
 	try {
 		await connectMongo()
