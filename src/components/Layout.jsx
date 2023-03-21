@@ -1,6 +1,6 @@
-import styles from '@/styles/components/Layout.module.scss'
+import { signIn, signOut, useSession } from 'next-auth/react'
 import Link from 'next/link'
-import { useSession, signOut, signIn } from 'next-auth/react'
+import styles from 'styles/components/Layout.module.scss'
 
 export default function Layout({ children, visible }) {
 	const { data: session } = useSession()

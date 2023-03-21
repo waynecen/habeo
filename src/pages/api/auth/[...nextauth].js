@@ -1,5 +1,5 @@
-import connectMongo from '@database/connectMongo'
-import Users from '@database/model/users'
+import connectMongo from 'database/connectMongo'
+import Users from 'database/model/users'
 import NextAuth from 'next-auth'
 import CredentialsProvider from 'next-auth/providers/credentials'
 import GoogleProvider from 'next-auth/providers/google'

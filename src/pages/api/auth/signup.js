@@ -1,5 +1,5 @@
-import connectMongo from '@database/connectMongo'
-import Users from '@database/model/users'
+import connectMongo from 'database/connectMongo'
+import Users from 'database/model/users'
 const argon2 = require('argon2')
 
 export default async function handler(req, res) {

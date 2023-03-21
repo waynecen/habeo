@@ -1,5 +1,5 @@
-import connectMongo from '@database/connectMongo'
-import Task from '@database/model/tasks'
+import connectMongo from 'database/connectMongo'
+import Task from 'database/model/tasks'
 
 export default async function getTasks(req, res) {
 	await connectMongo().catch((err) =>

@@ -1,7 +1,7 @@
 {
 	"name": "habi",
 	"version": "0.1.1",
-	"description": "Gamified Todo App.",
+	"description": "RPG Productivity App.",
 	"author": "Wayne Cen (https://waynecen.com/)",
 	"private": true,
 	"scripts": {
@@ -21,6 +21,7 @@
 		"next": "13.1.5",
 		"next-auth": "^4.19.2",
 		"react": "18.2.0",
+		"react-beautiful-dnd": "^13.1.1",
 		"react-dom": "18.2.0",
 		"react-icons": "^4.7.1"
 	},
