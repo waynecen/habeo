@@ -1,13 +1,13 @@
-import Layout from '@/components/Layout'
-import styles from '@/styles/auth/Register.module.scss'
-import { registerValidate } from '@lib/formValidation'
-import { useFormik } from 'formik'
+import Layout from 'components/Layout'
 import Head from 'next/head'
 import Link from 'next/link'
+import { useFormik } from 'formik'
+import { registerValidate } from 'lib/formValidation'
+import { signIn } from 'next-auth/react'
 import { useRouter } from 'next/router'
 import { useState } from 'react'
 import { RiEyeCloseLine, RiEyeLine } from 'react-icons/ri'
-import { signIn } from 'next-auth/react'
+import styles from 'styles/auth/Register.module.scss'
 
 export default function Register() {
 	// Styling

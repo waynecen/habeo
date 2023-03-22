@@ -1,14 +1,14 @@
-import Layout from '@/components/Layout'
-import styles from '@/styles/auth/Signin.module.scss'
-import loginValidate from '@lib/formValidation'
-import { useFormik } from 'formik'
-import { signIn } from 'next-auth/react'
+import Layout from 'components/Layout'
 import Head from 'next/head'
 import Image from 'next/image'
 import Link from 'next/link'
+import loginValidate from 'lib/formValidation'
+import { useFormik } from 'formik'
+import { signIn } from 'next-auth/react'
 import { useRouter } from 'next/router'
 import { useState } from 'react'
 import { RiEyeCloseLine, RiEyeLine } from 'react-icons/ri'
+import styles from 'styles/auth/Signin.module.scss'
 
 export default function SignIn() {
 	// Styling

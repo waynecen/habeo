@@ -1,8 +1,4 @@
-@import '@/styles/variables';
-
-.main {
-	height: 100%;
-}
+@import 'styles/variables';
 
 // Form
 .form {
@@ -29,11 +25,6 @@
 			background-color: $grey-10;
 			padding-inline: 12px;
 			padding-block: 6px;
-
-			&:focus {
-				// substitute with accent gradient
-				// border: $grey-border;
-			}
 		}
 
 		.button {
@@ -54,7 +45,7 @@
 	}
 }
 
-// Missions
+// Mission List
 .missionList {
 	max-width: 40vw;
 	width: 100%;
@@ -79,10 +70,10 @@
 		padding-inline: 12px;
 		padding-block: 4px;
 		transition: background-color $ease-out;
+		cursor: grab;
 
 		.details {
 			font-size: $xs-12;
-			cursor: auto;
 		}
 
 		.edit_icon {
