@@ -76,7 +76,9 @@
 			font-size: $xs-12;
 		}
 
-		.edit_icon {
+		.edit_icon,
+		.delete_icon {
+			all: unset;
 			justify-self: flex-end;
 			color: $grey-60;
 			visibility: hidden;
@@ -92,7 +94,8 @@
 		&:hover {
 			background-color: $grey-30;
 
-			.edit_icon {
+			.edit_icon,
+			.delete_icon {
 				visibility: visible;
 			}
 		}
