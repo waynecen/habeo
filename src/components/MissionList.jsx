@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react'
 import { DragDropContext, Draggable } from 'react-beautiful-dnd'
 import { BiPlus } from 'react-icons/bi'
 import { MdEdit } from 'react-icons/md'
+import { IoMdTrash } from 'react-icons/io'
 import styles from 'styles/components/MissionList.module.scss'
 
 export default function MissionList({ data }) {
@@ -32,10 +33,6 @@ export default function MissionList({ data }) {
 
 		updateMissions(data)
 	}, [data])
-
-	function addNewMission(description) {
-		updateMissions([...missions, { id: missions.length + 1, description }])
-	}
 
 	// Form handler
 	const formik = useFormik({
@@ -74,6 +71,37 @@ export default function MissionList({ data }) {
 		localStorage.setItem('missionOrder', JSON.stringify(idsOrderArray))
 
 		updateMissions(tasks)
+	}
+
+	// CRUD
+	function addNewMission(description) {
+		updateMissions([...missions, { id: missions.length + 1, description }])
+	}
+
+	async function deleteMission(id) {
+		// Remove from state
+		const removeItem = missions.filter(mission => {
+			return mission._id !== id
+		})
+		updateMissions(removeItem)
+
+		// Remove from order of localStorage array
+		const arrayIdsOrder = JSON.parse(localStorage.getItem('missionOrder'))
+
+		if (arrayIdsOrder?.length) {
+			const newIdsOrderArray = arrayIdsOrder.filter(num => num !== id)
+			localStorage.setItem('missionOrder', JSON.stringify(newIdsOrderArray))
+		}
+
+		// Remove from DB
+		const options = {
+			method: 'DELETE',
+			body: JSON.stringify(id),
+		}
+
+		await fetch('http://localhost:3000/api/tasks/deleteTask', options).then(
+			res => res.json
+		)
 	}
 
 	return (
@@ -115,9 +143,18 @@ export default function MissionList({ data }) {
 													className={styles.mission}
 												>
 													<p className={styles.details}>{mission.description}</p>
-													<span className={styles.edit_icon}>
-														<MdEdit size={20} />
-													</span>
+													<div className={styles.icons}>
+														<button className={styles.edit_icon}>
+															<MdEdit size={20} />
+														</button>
+
+														<button className={styles.delete_icon}>
+															<IoMdTrash
+																size={20}
+																onClick={() => deleteMission(mission._id)}
+															/>
+														</button>
+													</div>
 												</article>
 											)}
 										</Draggable>
