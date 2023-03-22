@@ -106,11 +106,7 @@ export default function MissionList({ data }) {
 							<section {...provided.droppableProps} ref={provided.innerRef}>
 								{missions.map((mission, index) => {
 									return (
-										<Draggable
-											key={mission._id}
-											draggableId={mission._id.toString()}
-											index={index}
-										>
+										<Draggable key={mission._id} draggableId={mission._id} index={index}>
 											{provided => (
 												<article
 													{...provided.draggableProps}
