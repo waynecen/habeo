@@ -123,7 +123,7 @@ export default function SignIn() {
 				<p className={styles.signup_text}>
 					Don&apos;t have an account?
 					<Link href="/auth/register" className={styles.signup_link}>
-						&nbsp;Sign Up
+						Sign Up
 					</Link>
 				</p>
 			</div>
