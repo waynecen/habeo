@@ -2,7 +2,7 @@ import { useFormik } from 'formik'
 import { StrictModeDroppable as Droppable } from 'lib/StrictModeDroppable'
 import { useState, useEffect } from 'react'
 import { DragDropContext, Draggable } from 'react-beautiful-dnd'
-import { BiPlus } from 'react-icons/bi'
+import { BiPlus, BiCheck, BiX } from 'react-icons/bi'
 import { MdEdit } from 'react-icons/md'
 import { IoMdTrash } from 'react-icons/io'
 import styles from 'styles/components/MissionList.module.scss'
@@ -10,6 +10,11 @@ import styles from 'styles/components/MissionList.module.scss'
 export default function MissionList({ data }) {
 	const [missions, updateMissions] = useState(data || [])
 
+	// Editing States
+	const [isEditing, setIsEditing] = useState(-1)
+	const [currentMission, setCurrentMission] = useState('')
+
+	// Drag and Drop Functionality
 	useEffect(() => {
 		const arrayIdsOrder = JSON.parse(localStorage.getItem('missionOrder'))
 
@@ -73,11 +78,56 @@ export default function MissionList({ data }) {
 		updateMissions(tasks)
 	}
 
-	// CRUD
+	// Add mission
 	function addNewMission(description) {
 		updateMissions([...missions, { id: missions.length + 1, description }])
 	}
 
+	// Update mission
+	// Form state
+	function handleEditClick(index) {
+		if (isEditing === index) {
+			setIsEditing(-1)
+		} else {
+			setIsEditing(index)
+		}
+	}
+
+	// Update Database
+	async function handleEditSubmit(e) {
+		e.preventDefault()
+
+		handleUpdateMission(e.target.id, currentMission)
+		const options = {
+			method: 'PATCH',
+			headers: { 'Content-Type': 'application/json' },
+			body: JSON.stringify({
+				id: e.target.id,
+				description: currentMission,
+			}),
+		}
+
+		await fetch('http://localhost:3000/api/tasks/updateTask', options).then(
+			res => res.json
+		)
+	}
+
+	// Update client state
+	function handleEditInputChange(e) {
+		setCurrentMission(e.target.value)
+	}
+
+	function handleUpdateMission(id, updatedMission) {
+		const updatedItem = missions.map(mission => {
+			return mission._id === id
+				? { ...mission, description: updatedMission }
+				: mission
+		})
+		setIsEditing(false)
+		updateMissions(updatedItem)
+	}
+
+	// Delete mission
 	async function deleteMission(id) {
 		// Remove from state
 		const removeItem = missions.filter(mission => {
@@ -142,19 +192,48 @@ export default function MissionList({ data }) {
 													ref={provided.innerRef}
 													className={styles.mission}
 												>
-													<p className={styles.details}>{mission.description}</p>
-													<div className={styles.icons}>
-														<button className={styles.edit_icon}>
-															<MdEdit size={20} />
-														</button>
+													{isEditing === index ? (
+														<>
+															<form
+																onSubmit={handleEditSubmit}
+																id={mission._id}
+																className={styles.edit_form}
+															>
+																<input
+																	id={mission._id}
+																	className={styles.edit_input}
+																	type="text"
+																	defaultValue={mission.description}
+																	onChange={handleEditInputChange}
+																/>
+																<div className={styles.icons}>
+																	<button type="submit" className={styles.confirm_icon}>
+																		<BiCheck size={26} />
+																	</button>
 
-														<button className={styles.delete_icon}>
-															<IoMdTrash
-																size={20}
-																onClick={() => deleteMission(mission._id)}
-															/>
-														</button>
-													</div>
+																	<button className={styles.cancel_icon}>
+																		<BiX size={26} onClick={() => handleEditClick(index)} />
+																	</button>
+																</div>
+															</form>
+														</>
+													) : (
+														<>
+															<p className={styles.details}>{mission.description}</p>
+															<div className={styles.icons}>
+																<button className={styles.edit_icon}>
+																	<MdEdit size={20} onClick={() => handleEditClick(index)} />
+																</button>
+
+																<button className={styles.delete_icon}>
+																	<IoMdTrash
+																		size={20}
+																		onClick={() => deleteMission(mission._id)}
+																	/>
+																</button>
+															</div>
+														</>
+													)}
 												</article>
 											)}
 										</Draggable>
