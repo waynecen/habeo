@@ -1,15 +1,9 @@
-import { Schema, model, models } from 'mongoose'
+import { Schema, models, model } from 'mongoose'
 
-const userSchema = new Schema({
+const userSchema = Schema({
 	username: String,
 	email: String,
 	password: String,
-	tasks: [
-		{
-			type: Schema.Types.ObjectId,
-			ref: 'Task',
-		},
-	],
 	createdAt: {
 		type: Date,
 		immutable: true,
@@ -21,6 +15,26 @@ const userSchema = new Schema({
 	},
 })
 
-const Users = models.user || model('user', userSchema)
+const taskSchema = Schema({
+	description: String,
+	difficulty: [],
+	completed: Boolean,
+	author: {
+		type: Schema.Types.ObjectId,
+		ref: 'User',
+	},
+	createdAt: {
+		type: Date,
+		immutable: true,
+		default: () => Date.now(),
+	},
+	updatedAt: {
+		type: Date,
+		default: () => Date.now(),
+	},
+})
 
-export default Users
+const User = models.User || model('User', userSchema)
+const Task = models.Task || model('Task', taskSchema)
+
+export { User, Task }
