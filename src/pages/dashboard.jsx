@@ -1,9 +1,11 @@
 import Layout from 'components/Layout'
 import MissionList from 'components/MissionList'
 import connectMongo from 'database/connectMongo'
-import Task from 'database/model/tasks'
+import { Task, User } from 'database/model/users'
 import Head from 'next/head'
 import styles from 'styles/pages/Dashboard.module.scss'
+import { authOptions } from './api/auth/[...nextauth]'
+import { getServerSession } from 'next-auth/next'
 
 export default function Dashboard({ data }) {
 	return (
@@ -25,18 +27,19 @@ export default function Dashboard({ data }) {
 	)
 }
 
-export async function getServerSideProps() {
-	try {
-		await connectMongo()
+export async function getServerSideProps(context) {
+	const session = await getServerSession(context.req, context.res, authOptions)
 
-		const data = await Task.find()
+	await connectMongo()
 
-		return {
-			props: {
-				data: JSON.parse(JSON.stringify(data)),
-			},
-		}
-	} catch (e) {
-		console.error(e)
+	const authorId = await User.findOne({
+		email: { $eq: session.user.email },
+	}).select('_id')
+
+	const data = await Task.find({ author: { $eq: authorId } })
+	return {
+		props: {
+			data: JSON.parse(JSON.stringify(data)),
+		},
 	}
 }
