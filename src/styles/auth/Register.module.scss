@@ -28,12 +28,12 @@
 		height: 44px;
 		margin-block: 8px;
 		border-radius: 4px;
-		border: $border-stroke;
+		border: $grey-border;
 		background-color: transparent;
 		color: white;
 		padding-inline: 8px;
 		outline: none; // remove for custom outlines
-		transition: border $ease-out ease-out;
+		transition: border $ease-out;
 
 		&::placeholder {
 			color: $placeholder;
@@ -47,11 +47,11 @@
 		// change the opacity of password icon on focus
 		+ * {
 			color: $placeholder;
-			transition: color $ease-out ease-out;
+			transition: color $ease-out;
 		}
 
 		&:focus + * {
-			color: $offwhite;
+			color: $grey-98;
 		}
 	}
 
@@ -63,7 +63,7 @@
 		right: 12px;
 
 		&:hover {
-			color: $offwhite;
+			color: $grey-98;
 		}
 	}
 }
@@ -78,7 +78,7 @@
 		align-items: center;
 		justify-content: center;
 		font-size: 14px;
-		color: $offblack;
+		color: $grey-05;
 		height: 44px;
 		border: none;
 		border-radius: 4px;
@@ -87,9 +87,9 @@
 	}
 
 	.button:first-child {
-		color: $offwhite;
+		color: $grey-98;
 		background-color: $primary-btn;
-		transition: background-color $ease-out ease-out;
+		transition: background-color $ease-out;
 
 		&:hover {
 			background-color: $primary-btn-hover;
@@ -107,15 +107,14 @@
 		text-decoration: none;
 		text-align: center;
 		color: white;
-		background-color: $btn;
+		background-color: $grey-15;
 		border: 1px #454545 solid;
 		border-radius: 4px;
 		padding: $btn-padding;
-		transition-duration: $ease-out;
-		transition-timing-function: ease-out;
+		transition: background-color $ease-out;
 
 		&:hover {
-			background-color: $btn-hover;
+			background-color: $grey-20;
 		}
 	}
 }

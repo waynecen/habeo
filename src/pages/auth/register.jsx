@@ -26,7 +26,7 @@ export default function Register() {
 		}
 
 		await fetch('http://localhost:3000/api/auth/signup', options).then(
-			(res) => res.json
+			res => res.json
 		)
 
 		const status = await signIn('credentials', {
@@ -133,7 +133,7 @@ export default function Register() {
 				<p className={styles.signup_text}>
 					Have an account?
 					<Link href="/auth/signin" className={styles.signup_link}>
-						&nbsp;Log In
+						Log In
 					</Link>
 				</p>
 			</div>

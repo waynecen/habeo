@@ -1,5 +1,5 @@
 import connectMongo from 'database/connectMongo'
-import Task from 'database/model/tasks'
+import { Task } from 'database/model/users'
 
 export default async function handler(req, res) {
 	await connectMongo().catch(err =>

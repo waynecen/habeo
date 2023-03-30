@@ -1,9 +1,9 @@
 import connectMongo from 'database/connectMongo'
-import Users from 'database/model/users'
+import { User } from 'database/model/users'
 const argon2 = require('argon2')
 
 export default async function handler(req, res) {
-	connectMongo().catch((error) =>
+	connectMongo().catch(error =>
 		res.json({ error: 'Failed connection to database' })
 	)
 
@@ -15,7 +15,7 @@ export default async function handler(req, res) {
 			const { username, email, password } = req.body
 
 			// Check if user exists
-			const userExists = await Users.findOne({ email })
+			const userExists = await User.findOne({ email })
 			if (userExists) {
 				return res.status(422).json({
 					message:
@@ -32,7 +32,7 @@ export default async function handler(req, res) {
 			})
 
 			// Create user
-			Users.create({ username, email, password: await hash })
+			User.create({ username, email, password: await hash })
 			res.status(201).json({ message: 'User created successfully' })
 		} else {
 			res.status(500).json({ message: 'Invalid HTTP Method' })
