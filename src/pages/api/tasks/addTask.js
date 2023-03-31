@@ -1,5 +1,5 @@
 import connectMongo from 'database/connectMongo'
-import Task from 'database/model/tasks'
+import { Task, User } from 'database/model/users'
 
 export default async function handler(req, res) {
 	await connectMongo().catch(err =>
@@ -13,13 +13,19 @@ export default async function handler(req, res) {
 				return res.status(404).json({ error: 'Missing field data' })
 			}
 
+			const authorId = await User.findOne({
+				email: { $eq: req.body.email },
+			}).select('_id')
+
 			// Create new instance of task
-			const task = await Task.create(req.body)
-			res.json({ task })
+			const task = await Task.create({ ...req.body, author: authorId })
+
+			res.json(task)
 		} else {
 			res.status(500).json({ message: 'Invalid HTTP Method' })
 		}
 	} catch (err) {
+		console.log(err)
 		return res.status(404).json({ err: 'Failed to create task' })
 	}
 }

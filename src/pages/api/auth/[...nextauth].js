@@ -1,5 +1,5 @@
 import connectMongo from 'database/connectMongo'
-import Users from 'database/model/users'
+import { User } from 'database/model/users'
 import NextAuth from 'next-auth'
 import CredentialsProvider from 'next-auth/providers/credentials'
 import GoogleProvider from 'next-auth/providers/google'
@@ -13,14 +13,14 @@ export const authOptions = {
 		CredentialsProvider({
 			id: 'credentials',
 			name: 'Credentials',
-			async authorize(credentials, req) {
+			async authorize(credentials) {
 				// Connect to Database
-				await connectMongo().catch((error) => {
+				await connectMongo().catch(error => {
 					error: 'Failed to connect to database'
 				})
 
 				// Check for existing user
-				const user = await Users.findOne({ email: credentials.email })
+				const user = await User.findOne({ email: credentials.email })
 				if (!user) {
 					throw new Error('User with this email does not exist')
 				}
