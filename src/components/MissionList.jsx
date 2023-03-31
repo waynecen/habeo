@@ -1,11 +1,13 @@
 import { useFormik } from 'formik'
 import { StrictModeDroppable as Droppable } from 'lib/StrictModeDroppable'
-import { useState, useEffect } from 'react'
+import { getSession } from 'next-auth/react'
+import { useEffect, useState } from 'react'
 import { DragDropContext, Draggable } from 'react-beautiful-dnd'
-import { BiPlus, BiCheck, BiX } from 'react-icons/bi'
-import { MdEdit } from 'react-icons/md'
+import { BiCheck, BiPlus, BiX } from 'react-icons/bi'
 import { IoMdTrash } from 'react-icons/io'
+import { MdEdit } from 'react-icons/md'
 import styles from 'styles/components/MissionList.module.scss'
+import { v4 as uuidv4 } from 'uuid'
 
 export default function MissionList({ data }) {
 	const [missions, updateMissions] = useState(data || [])
@@ -39,29 +41,6 @@ export default function MissionList({ data }) {
 		updateMissions(data)
 	}, [data])
 
-	// Form handler
-	const formik = useFormik({
-		initialValues: {
-			description: '',
-			completed: false,
-		},
-		onSubmit,
-	})
-
-	// Form submit
-	async function onSubmit(values) {
-		const options = {
-			method: 'POST',
-			headers: { 'Content-Type': 'application/json' },
-			body: JSON.stringify(values),
-		}
-
-		await fetch('http://localhost:3000/api/tasks/addTask', options).then(
-			res => res.json
-		),
-			addNewMission(values.description)
-	}
-
 	// Handle order of items after drag
 	function handleOnDragEnd(result) {
 		if (!result?.destination) return
@@ -79,8 +58,41 @@ export default function MissionList({ data }) {
 	}
 
 	// Add mission
-	function addNewMission(description) {
-		updateMissions([...missions, { id: missions.length + 1, description }])
+	// Add to state
+	function addNewMission(objectId, description) {
+		updateMissions([...missions, { _id: objectId, id: uuidv4(), description }])
+	}
+
+	// Form handler
+	const formik = useFormik({
+		initialValues: {
+			description: '',
+			completed: false,
+		},
+		onSubmit,
+	})
+
+	async function getUserEmail() {
+		const session = await getSession()
+		return session.user.email
+	}
+
+	// Form submit
+	async function onSubmit(values, { resetForm }) {
+		const userEmail = await getUserEmail()
+		const options = {
+			method: 'POST',
+			headers: { 'Content-Type': 'application/json' },
+			body: JSON.stringify({ ...values, email: userEmail }),
+		}
+		let newId
+		await fetch('http://localhost:3000/api/tasks/addTask', options).then(res =>
+			res.json().then(value => {
+				newId = value._id
+			})
+		),
+			addNewMission(newId, values.description)
+		resetForm({ values: '' })
 	}
 
 	// Update mission
@@ -128,13 +140,30 @@ export default function MissionList({ data }) {
 	}
 
 	// Delete mission
-	async function deleteMission(id) {
-		// Remove from state
-		const removeItem = missions.filter(mission => {
-			return mission._id !== id
-		})
-		updateMissions(removeItem)
+	async function deleteMission(clientId, id) {
+		if (!clientId) {
+			// Remove from state
+			const removeItem = missions.filter(mission => {
+				return mission._id !== id
+			})
+			updateMissions(removeItem)
+		} else {
+			const removeClientItem = missions.filter(mission => {
+				return mission.id !== clientId
+			})
+			updateMissions(removeClientItem)
+		}
 
+		// Remove from DB
+		const options = {
+			method: 'DELETE',
+			headers: { 'Content-Type': 'application/json' },
+			body: JSON.stringify(id),
+		}
+
+		await fetch('http://localhost:3000/api/tasks/deleteTask', options).then(
+			res => res.json
+		)
 		// Remove from order of localStorage array
 		const arrayIdsOrder = JSON.parse(localStorage.getItem('missionOrder'))
 
@@ -142,16 +171,6 @@ export default function MissionList({ data }) {
 			const newIdsOrderArray = arrayIdsOrder.filter(num => num !== id)
 			localStorage.setItem('missionOrder', JSON.stringify(newIdsOrderArray))
 		}
-
-		// Remove from DB
-		const options = {
-			method: 'DELETE',
-			body: JSON.stringify(id),
-		}
-
-		await fetch('http://localhost:3000/api/tasks/deleteTask', options).then(
-			res => res.json
-		)
 	}
 
 	return (
@@ -184,7 +203,11 @@ export default function MissionList({ data }) {
 							<section {...provided.droppableProps} ref={provided.innerRef}>
 								{missions.map((mission, index) => {
 									return (
-										<Draggable key={mission._id} draggableId={mission._id} index={index}>
+										<Draggable
+											key={`${mission._id ? mission._id : mission.id}`}
+											draggableId={index.toString()}
+											index={index}
+										>
 											{provided => (
 												<article
 													{...provided.draggableProps}
@@ -228,7 +251,7 @@ export default function MissionList({ data }) {
 																<button className={styles.delete_icon}>
 																	<IoMdTrash
 																		size={20}
-																		onClick={() => deleteMission(mission._id)}
+																		onClick={() => deleteMission(mission.id, mission._id)}
 																	/>
 																</button>
 															</div>

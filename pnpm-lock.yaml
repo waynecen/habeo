@@ -16,6 +16,7 @@ specifiers:
   react-dom: 18.2.0
   react-icons: ^4.7.1
   sass: ^1.57.1
+  uuid: ^9.0.0
 
 dependencies:
   '@next-auth/mongodb-adapter': 1.1.1_ka7cmjxz2wm2tpnjlunhwpfz5u
@@ -30,6 +31,7 @@ dependencies:
   react-beautiful-dnd: 13.1.1_biqbaboplfbrettd7655fr4n2y
   react-dom: 18.2.0_react@18.2.0
   react-icons: 4.7.1_react@18.2.0
+  uuid: 9.0.0
 
 devDependencies:
   eslint: 8.35.0
@@ -2732,6 +2734,11 @@ packages:
 
   /uuid/8.3.2:
     resolution: {integrity: sha512-+NYs2QeMWy+GWFOEm9xnn6HCDp0l7QBD7ml8zLUmJ+93Q5NF0NocErnwkTkXVFNiX3/fpC6afS8Dhb/gz7R7eg==}
+    hasBin: true
+    dev: false
+
+  /uuid/9.0.0:
+    resolution: {integrity: sha512-MXcSTerfPa4uqyzStbRoTgt5XIe3x5+42+q1sDuy3R5MDk66URdLMOZe5aPX/SQd+kuYAh0FdP/pO28IkQyTeg==}
     hasBin: true
     dev: false
 
