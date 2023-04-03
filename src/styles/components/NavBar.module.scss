@@ -1,0 +1,62 @@
+@import 'styles/variables';
+
+.wrapper {
+	display: flex;
+	flex-direction: row;
+	align-self: center;
+	background-color: $grey-15;
+	max-width: fit-content;
+	padding: 4px 4px;
+	border: $grey-border;
+	border-radius: 8px;
+	margin-bottom: 20px;
+
+	.icon_dashboard,
+	.icon_insights {
+		display: flex;
+		justify-content: center;
+		background-color: $grey-15;
+		color: $grey-60;
+		margin: 4px;
+		padding: 4px 12px;
+		border-radius: $brdr-radius;
+		transition: color $ease-out;
+
+		&:hover {
+			background-color: $grey-10;
+			color: $grey-98;
+		}
+	}
+
+	.tooltip {
+		position: relative;
+
+		&::before {
+			content: attr(data-text);
+			position: absolute;
+			pointer-events: none;
+			user-select: none;
+
+			/* vertically center */
+			top: -120%;
+
+			/* basic styles */
+			font-size: $xs-12;
+			width: fit-content;
+			padding: 8px 12px;
+			border-radius: 4px;
+			background: $grey-15;
+			color: $grey-98;
+			text-align: center;
+			opacity: 0;
+			transition: opacity $ease-out;
+			transition-delay: 0s;
+		}
+
+		&:hover::before {
+			visibility: visible;
+			transition-delay: 0.5s;
+			opacity: 1;
+		}
+	}
+}
