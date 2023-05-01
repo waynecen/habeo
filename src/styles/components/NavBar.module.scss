@@ -1,6 +1,8 @@
 @import 'styles/variables';
 
 .wrapper {
+	position: fixed;
+	top: 90%;
 	display: flex;
 	flex-direction: row;
 	align-self: center;

@@ -21,7 +21,7 @@ export default function NavBar() {
 					<BiNews size={22} aria-label="dashboard" />
 				</span>
 			</Link>
-			<Link href="/">
+			<Link href="/insights">
 				<span
 					data-text="Insights"
 					className={`${styles.tooltip} ${styles.icon_insights}`}
